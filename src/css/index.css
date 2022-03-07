@@ -1,0 +1,21 @@
+/* wraps everything in the widget */
+/* .rwp-outer{} */
+
+/* intro message at top of form */
+/* .rwp-intro{} */
+
+.rwp-share-buttons{
+    list-style: none;
+}
+
+/* groups all fields on a page */
+/* .rwp-page{} */
+
+/* contains labels, error messages and inputs */
+/* .rwp-field{} */
+
+/* field error messages */
+.rwp-error{
+    display: block;
+    font-size: 0.9rem;
+}
