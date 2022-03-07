@@ -15,7 +15,7 @@ export const schema = Yup.object().shape({
       /^[a-zA-Z]{1,2}([0-9]{1,2}|[0-9][a-zA-Z])\s*[0-9][a-zA-Z]{2}$/,
       "That doesn't look like a valid postcode"
     )
-    .required(config.invalidPostcodeError),
+    .required(config.invalid_postcode_error),
 })
 
 export const page1Schema = schema.pick(["body", "subject", "name", "email"])

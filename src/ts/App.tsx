@@ -22,24 +22,31 @@ const App = () => {
       if (page === 1) {
         setPage(2)
       } else {
-        const res = await fetch(
+        const res1 = await fetch(
           `https://api.postcodes.io/postcodes/${values.postcode}`
         )
-        const data = await res.json()
+        const data = await res1.json()
         if (isPostcodeElecting(data)) {
           // TODO: change email
         }
-        // TODO: submit correct values to wp
+        const res2 = await fetch("/wp-json/rwp/submit", {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        if (res2.status !== 201) throw "Failed to submit"
         setPage(3)
       }
     } catch (e) {
-      setStatus(config.sendingFailedError)
+      setStatus(config.sending_failed_error)
     }
   }
 
   return (
     <div className="rwp-outer">
-      <p className="rwp-intro">{config.introMessage}</p>
+      <p className="rwp-intro">{config.intro_message}</p>
 
       {page === 3 ? (
         <div className="rwp-success" role="alert">
@@ -48,7 +55,7 @@ const App = () => {
           <ul className="rwp-share-buttons">
             <li>
               <a
-                href={`https://twitter.com/intent/tweet?text=${config.twitterShareMessage}`}
+                href={`https://twitter.com/intent/tweet?text=${config.twitter_share_message}`}
               >
                 Share on Twitter
               </a>
@@ -62,7 +69,7 @@ const App = () => {
             </li>
             <li>
               <a
-                href={`https://api.whatsapp.com/send?text=${config.whatsappShareMessage}`}
+                href={`https://api.whatsapp.com/send?text=${config.whatsapp_share_message}`}
               >
                 Share on Whatsapp
               </a>
@@ -78,8 +85,8 @@ const App = () => {
           initialValues={{
             name: "Foo Bar",
             email: "foo@bar.com",
-            subject: config.defaultSubject,
-            body: config.defaultMessage,
+            subject: config.default_subject,
+            body: config.default_message,
             postcode: "",
           }}
         >
@@ -90,25 +97,25 @@ const App = () => {
               {page === 1 && (
                 <section className="rwp-page">
                   <div className="rwp-field">
-                    <label htmlFor="name">{config.nameLabel}</label>
+                    <label htmlFor="name">{config.name_label}</label>
                     <ErrorMessage name="name" />
                     <Field name="name" id="name" />
                   </div>
 
                   <div className="rwp-field">
-                    <label htmlFor="email">{config.emailLabel}</label>
+                    <label htmlFor="email">{config.email_label}</label>
                     <ErrorMessage name="email" />
                     <Field name="email" id="email" />
                   </div>
 
                   <div className="rwp-field">
-                    <label htmlFor="subject">{config.subjectLabel}</label>
+                    <label htmlFor="subject">{config.subject_label}</label>
                     <ErrorMessage name="subject" />
                     <Field name="subject" id="subject" />
                   </div>
 
                   <div className="rwp-field">
-                    <label htmlFor="body">{config.bodyLabel}</label>
+                    <label htmlFor="body">{config.body_label}</label>
                     <ErrorMessage name="body" />
                     <Field name="body" id="body" as="textarea" />
                   </div>
@@ -118,14 +125,14 @@ const App = () => {
               {page === 2 && (
                 <section className="rwp-page">
                   <div className="rwp-field">
-                    <label htmlFor="postcode">{config.postcodeLabel}</label>
+                    <label htmlFor="postcode">{config.postcode_label}</label>
                     <ErrorMessage name="postcode" />
                     <Field name="postcode" id="postcode" />
                   </div>
                 </section>
               )}
 
-              <button>{page === 2 ? "Send" : "Continue"}</button>
+              <button type="submit">{page === 2 ? "Send" : "Continue"}</button>
             </Form>
           )}
         </Formik>

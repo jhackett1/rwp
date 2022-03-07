@@ -1,21 +1,21 @@
 interface Config {
-  introMessage: string
+  intro_message: string
   //   labels
-  nameLabel: string
-  emailLabel: string
-  subjectLabel: string
-  bodyLabel: string
-  postcodeLabel: string
+  name_label: string
+  email_label: string
+  subject_label: string
+  body_label: string
+  postcode_label: string
   //   defaults
-  defaultSubject: string
-  defaultMessage: string
+  default_subject: string
+  default_message: string
   //   errors
-  sendingFailedError: string
-  invalidPostcodeError: string
+  sending_failed_error: string
+  invalid_postcode_error: string
   //   sharing messages
-  twitterShareMessage: string
-  facebookShareMessage: string
-  whatsappShareMessage: string
+  twitter_share_message: string
+  facebook_share_message: string
+  whatsapp_share_message: string
 }
 
 declare global {
@@ -25,23 +25,24 @@ declare global {
 }
 
 const config: Config = {
-  introMessage:
-    "ask your next metro mayor to sign the creative workforce pledge! Get started here👇",
-  sendingFailedError:
+  intro_message: "",
+  sending_failed_error:
     "There was a problem sending your message. Please refresh the page or try again later.",
-  defaultMessage: "Default body here",
-  defaultSubject: "Default subject here",
-  nameLabel: "Your name",
-  emailLabel: "Your email",
-  subjectLabel: "Subject",
-  bodyLabel: "Message",
-  postcodeLabel: "Your postcode",
-  invalidPostcodeError:
+  default_message: "",
+  default_subject: "",
+  name_label: "Your name",
+  email_label: "Your email",
+  subject_label: "Subject",
+  body_label: "Message",
+  postcode_label: "Your postcode",
+  invalid_postcode_error:
     "We need your postcode to send your message to the right place",
-  twitterShareMessage: "Example twitter share message",
-  facebookShareMessage: "Example facebook share message",
-  whatsappShareMessage: "Example whatsapp share message",
+  twitter_share_message: "Example twitter share message",
+  facebook_share_message: "Example facebook share message",
+  whatsapp_share_message: "Example whatsapp share message",
   ...window?.___RWP_CONFIG___,
 }
+
+console.log(window.___RWP_CONFIG___)
 
 export default config
