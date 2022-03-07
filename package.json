@@ -13,6 +13,6 @@
   },
   "scripts": {
     "dev": "parcel watch src/ts/index.tsx",
-    "build": "parcel build src/ts/index.ts"
+    "build": "parcel build src/ts/index.tsx"
   }
 }
