@@ -6,6 +6,8 @@ It gives you a shortcode `[rwp-postcode-lookup-form]`, which spits out the HTML 
 
 ## Developing
 
-    Run npm i and npm run build
-    Delete the node_modules, src and .cache directories, which aren't needed once built.
-    Compress the whole directory, upload it to a WP site and activate it.
+You need node.js installed.
+
+1. Run `npm i` and `npm run build`
+2. Delete the `node_modules`, `src` and `.parcel-cache` directories, which aren't needed once built.
+3. Compress the whole directory, upload it to a WP site and activate it.
