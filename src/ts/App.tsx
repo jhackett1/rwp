@@ -37,7 +37,7 @@ const App = () => {
           },
         })
         if (res2.status !== 201) throw "Failed to submit"
-        setPage(3)
+        // setPage(3)
       }
     } catch (e) {
       setStatus(config.sending_failed_error)

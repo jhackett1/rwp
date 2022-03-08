@@ -1,9 +1,9 @@
 <?php
 
-
-function rwp_text_field(string $label, string $name, string $section, bool $textarea = false)
+// generic generator for settings fields
+function rwp_text_field(string $label, string $name, string $section, bool $textarea = false, string $hint = "")
 {
-    add_settings_field("rwp_setting_{$name}", $label, function () use ($name, $textarea) {
+    add_settings_field("rwp_setting_{$name}", $label, function () use ($name, $textarea, $hint) {
         $options = get_option('rwp_options');
 
         if ($textarea) {
@@ -11,6 +11,7 @@ function rwp_text_field(string $label, string $name, string $section, bool $text
         } else {
             echo "<input id='rwp_setting_{$name}' name='rwp_options[{$name}]' type='text' value='" . esc_attr($options[(string) $name] ?? "") . "' />";
         }
+        if ($hint) echo "<p class='description'>" . $hint . "</p>";
     }, 'rwp', $section);
 }
 
@@ -41,6 +42,13 @@ function rwp_render_plugin_settings_page()
 function rwp_register_settings()
 {
     register_setting('rwp_options', 'rwp_options');
+
+
+    add_settings_section('setup', 'Setup', function () {
+    }, 'rwp');
+
+    rwp_text_field("Form submission endpoint", "form_submit_endpoint", "setup");
+    rwp_text_field("Candidate emails", "candidate_emails", "setup", true, "Put each email address on a new line");
 
     add_settings_section('form_content', 'Form content', function () {
     }, 'rwp');

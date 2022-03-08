@@ -24,6 +24,7 @@ declare global {
   }
 }
 
+// set initial config
 const config: Config = {
   intro_message: "",
   sending_failed_error:
