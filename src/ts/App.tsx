@@ -90,7 +90,7 @@ const App = () => {
             postcode: "",
           }}
         >
-          {({ status }) => (
+          {({ status, isSubmitting }) => (
             <Form>
               {status && <p>{status}</p>}
 
@@ -132,7 +132,9 @@ const App = () => {
                 </section>
               )}
 
-              <button type="submit">{page === 2 ? "Send" : "Continue"}</button>
+              <button disabled={isSubmitting} type="submit">
+                {page === 2 ? "Send" : "Continue"}
+              </button>
             </Form>
           )}
         </Formik>
