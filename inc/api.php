@@ -14,6 +14,7 @@ function rwp_handler($req)
 
     // 1. get form values
     $data = $req->get_json_params();
+
     // 2. save submission
     $remote_res = wp_remote_post($endpoint, array(
         'body' => json_encode($data),
@@ -22,13 +23,16 @@ function rwp_handler($req)
         ]
     ));
     if (is_wp_error($remote_res)) return  new WP_Error('failed_submit', 'Failed to submit', array('status' => 500));;
-    // 3. send email
-    $success = false;
 
-    for ($i = 0; $i < count($recipient_emails); $i++) {
-        $success = wp_mail(str_replace("\r", "", $recipient_emails[$i]), $data["subject"], $data["body"]);
+    // 3. send emails
+    if ($data["in_south_yorkshire"]) {
+        $success = false;
+        for ($i = 0; $i < count($recipient_emails); $i++) {
+            $success = wp_mail(str_replace("\r", "", $recipient_emails[$i]), $data["subject"], $data["body"]);
+        }
+        if (!$success) return new WP_Error('failed_email', 'Failed to send email', array('status' => 500));
     }
-    if (!$success) return new WP_Error('failed_email', 'Failed to send email', array('status' => 500));
+
     $res = new WP_REST_Response();
     $res->set_status(201);
     return $res;

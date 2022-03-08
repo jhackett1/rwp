@@ -26,18 +26,18 @@ const App = () => {
           `https://api.postcodes.io/postcodes/${values.postcode}`
         )
         const data = await res1.json()
-        if (isPostcodeElecting(data)) {
-          // TODO: change email
-        }
         const res2 = await fetch("/wp-json/rwp/submit", {
           method: "POST",
-          body: JSON.stringify(values),
+          body: JSON.stringify({
+            ...values,
+            in_south_yorkshire: isPostcodeElecting(data),
+          }),
           headers: {
             "Content-Type": "application/json",
           },
         })
         if (res2.status !== 201) throw "Failed to submit"
-        // setPage(3)
+        setPage(3)
       }
     } catch (e) {
       setStatus(config.sending_failed_error)
