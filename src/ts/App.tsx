@@ -83,8 +83,8 @@ const App = () => {
           onSubmit={handleSubmit}
           validationSchema={page === 2 ? page2Schema : page1Schema}
           initialValues={{
-            name: "Foo Bar",
-            email: "foo@bar.com",
+            name: "",
+            email: "",
             subject: config.default_subject,
             body: config.default_message,
             postcode: "",
